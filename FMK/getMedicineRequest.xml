@@ -1,8 +1,8 @@
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01" xmlns:ns1="http://www.sdsd.dk/dgws/2012/06" xmlns:ns2="http://www.sdsd.dk/dgws/2010/08" xmlns:e2="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E2" xmlns:dgws="http://www.medcom.dk/dgws/2006/04/dgws-1.0.xsd" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:ns3="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01" xmlns:e1="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1">
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01" xmlns:ns1="http://www.sdsd.dk/dgws/2012/06" xmlns:ns2="http://www.sdsd.dk/dgws/2010/08" xmlns:e2="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E4" xmlns:dgws="http://www.medcom.dk/dgws/2006/04/dgws-1.0.xsd" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ns3="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01" xmlns:e1="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1">
    <soapenv:Header>
       <ns:ConsentHeader>
          <!--1 or more repetitions:-->
-         <ns:Consent source="?">
+         <ns:Consent source="User">
             <!--Optional:-->
             <ns:FromDate>2024-01-01</ns:FromDate>
             <!--Optional:-->
@@ -20,12 +20,12 @@
          <ns2:OrgUsingName>AWORK A/S</ns2:OrgUsingName>
          <ns2:OrgUsingID NameFormat="medcom:skscode">1111</ns2:OrgUsingID>
          <!-- <ns2:BorgerOpslag/> -->
-         <ns2:RequestedRole>Apoteker</ns2:RequestedRole>
+         <ns2:RequestedRole>Web administrator</ns2:RequestedRole>
       </ns1:WhitelistingHeader>
       <e2:OnBehalfOf>
          <!--You have a CHOICE of the next 2 items at this level-->
          <!-- <e2:AuthorisationIdentifier>01234</e2:AuthorisationIdentifier> -->
-         <e2:PersonIdentifier source="CPR">0501792275</e2:PersonIdentifier>
+         <e2:PersonIdentifier source="CPR">0102792941</e2:PersonIdentifier>
       </e2:OnBehalfOf>
       <dgws:Header>
          <!--Optional:-->
@@ -50,8 +50,21 @@
          <!-- Timestamp element -->
          <wsu:Timestamp>
             <wsu:Created>2024-10-10T10:00:00Z</wsu:Created>
-            <!-- <wsu:Expires>2024-10-10T10:05:00Z</wsu:Expires> -->
          </wsu:Timestamp>
+         <saml:Assertion id="IDCard" Version="1" IssueInstant="2024-11-08T09:51:00Z">
+            <saml:Issuer>IDCardData</saml:Issuer>
+            <saml:Subject>
+               <saml:NameID Format="medcom:cprnumber">0102792941</saml:NameID>
+            </saml:Subject>
+            <saml:Conditions
+					NotBefore="2002-10-31T21:42:12Z"
+					NotOnOrAfter="2002-10-31T21:42:43Z" />
+            <saml:AttributeStatement id="IDCardData">
+               <saml:Attribute Name="aaa">
+                  <saml:AttributeValue>sadsads</saml:AttributeValue>
+               </saml:Attribute>
+            </saml:AttributeStatement>
+         </saml:Assertion>
          
          <!-- Additional security elements like UsernameToken or BinarySecurityToken can go here -->
          
@@ -59,9 +72,13 @@
    </soapenv:Header>
    <soapenv:Body>
       <e2:GetMedicineCardRequest>
-         <e2:PersonIdentifier source="CPR">0501792275</e2:PersonIdentifier>
+         <Name>
+            <GivenName>Jens</GivenName>
+            <Surname>Jensen</Surname>
+         </Name>
+         <e2:PersonIdentifier source="CPR">0102792941</e2:PersonIdentifier>
          <!--Zero or more repetitions:-->
-         <e2:Version>133283328800420001</e2:Version>
+         <e2:Version>1341404069183002002</e2:Version>
          <!--Zero or more repetitions:-->
          <e2:DateTime>2024-11-08T09:51:00Z</e2:DateTime>
          <!--Optional:-->
