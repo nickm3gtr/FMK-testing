@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		xmlns:medicinecard20150101E4="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E4"
+		xmlns:medicinecard20150101E2="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E2"
+		xmlns:medicinecard20150101="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01"
+		targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E4"
+		elementFormDefault="qualified"
+		attributeFormDefault="unqualified">
+
+	<import schemaLocation="importsFrom20150101E2.xsd" namespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E2"/>
+	<import schemaLocation="importsFrom20150101.xsd" namespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01"/>
+	<include schemaLocation="importsFrom20150101E4.xsd"/>
+
+	<element name="GetPrescriptionResidualAmountRequest" type="medicinecard20150101E4:GetPrescriptionResidualAmountRequestType">
+		<annotation>
+			<documentation xml:lang="en-GB">Outer container element for a request for the amount that has been effectuated and the amount remaning on one or more prescriptions</documentation>
+			<documentation xml:lang="da-DK">Ydre container-element for en forespørgsel efter mængden der er blevet effektueret og mængden der er tilbage på en eller flere recepter</documentation>
+		</annotation>
+	</element>
+
+	<complexType name="GetPrescriptionResidualAmountRequestType">
+		<sequence>
+			<element name="PersonIdentifier" type="medicinecard20150101E2:PersonIdentifierType"/>
+			<element name="PrescriptionMedicationIdentifier" type="medicinecard20150101:PrescriptionMedicationIdentifierType" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,87 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01" xmlns:ns1="http://www.sdsd.dk/dgws/2012/06" xmlns:ns2="http://www.sdsd.dk/dgws/2010/08" xmlns:e2="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E2" xmlns:dgws="http://www.medcom.dk/dgws/2006/04/dgws-1.0.xsd" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:ns3="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01" xmlns:e1="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1">
+   <soapenv:Header>
+      <ns:ConsentHeader>
+         <!--1 or more repetitions:-->
+         <ns:Consent source="?">
+            <!--Optional:-->
+            <ns:FromDate>2024-01-01</ns:FromDate>
+            <!--Optional:-->
+            <ns:ToDate>2024-12-30</ns:ToDate>
+            <ns:ConsentType>PrivateDataConsentGiven</ns:ConsentType>
+            <ns:Content>MedicineCard</ns:Content>
+         </ns:Consent>
+      </ns:ConsentHeader>
+      <ns1:WhitelistingHeader>
+         <ns2:SystemOwnerName>AWORK A/S</ns2:SystemOwnerName>
+         <ns2:SystemName>CitizenOne</ns2:SystemName>
+         <ns2:SystemVersion>2024.1.0</ns2:SystemVersion>
+         <!--You have a CHOICE of the next 2 items at this level-->
+         <ns2:OrgResponsibleName>AWORK A/S</ns2:OrgResponsibleName>
+         <ns2:OrgUsingName>AWORK A/S</ns2:OrgUsingName>
+         <ns2:OrgUsingID NameFormat="medcom:skscode">1111</ns2:OrgUsingID>
+         <!-- <ns2:BorgerOpslag/> -->
+         <ns2:RequestedRole>Apoteker</ns2:RequestedRole>
+      </ns1:WhitelistingHeader>
+      <e2:OnBehalfOf>
+         <!--You have a CHOICE of the next 2 items at this level-->
+         <!-- <e2:AuthorisationIdentifier>01234</e2:AuthorisationIdentifier> -->
+         <e2:PersonIdentifier source="CPR">0501792275</e2:PersonIdentifier>
+      </e2:OnBehalfOf>
+      <dgws:Header>
+         <!--Optional:-->
+         <dgws:SecurityLevel>1</dgws:SecurityLevel>
+         <!--Optional:-->
+         <dgws:TimeOut>1440</dgws:TimeOut>
+         <dgws:Linking>
+            <!--Optional:-->
+            <dgws:FlowID>A121</dgws:FlowID>
+            <dgws:MessageID>B321</dgws:MessageID>
+            <!--Optional:-->
+            <dgws:InResponseToMessageID>C222</dgws:InResponseToMessageID>
+         </dgws:Linking>
+         <!--Optional:-->
+         <dgws:FlowStatus>flow_running</dgws:FlowStatus>
+         <!--Optional:-->
+         <dgws:Priority>RUTINE</dgws:Priority>
+         <!--Optional:-->
+         <dgws:RequireNonRepudiationReceipt>yes</dgws:RequireNonRepudiationReceipt>
+      </dgws:Header>
+      <wsse:Security>
+         <!-- Timestamp element -->
+         <wsu:Timestamp>
+            <wsu:Created>2024-10-10T10:00:00Z</wsu:Created>
+            <!-- <wsu:Expires>2024-10-10T10:05:00Z</wsu:Expires> -->
+         </wsu:Timestamp>
+         
+         <!-- Additional security elements like UsernameToken or BinarySecurityToken can go here -->
+         
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <e2:GetMedicineCardRequest>
+         <e2:PersonIdentifier source="CPR">0501792275</e2:PersonIdentifier>
+         <!--Zero or more repetitions:-->
+         <e2:Version>133283328800420001</e2:Version>
+         <!--Zero or more repetitions:-->
+         <e2:DateTime>2024-11-08T09:51:00Z</e2:DateTime>
+         <!--Optional:-->
+         <e2:NegativeConsent>
+            <!--You have a CHOICE of the next 2 items at this level-->
+            <ns3:ConsentGiven>
+               <ns3:FromDate>2024-11-01</ns3:FromDate>
+               <ns3:ToDate>2024-11-28</ns3:ToDate>
+            </ns3:ConsentGiven>
+            <!-- <ns3:ConsentOverridden/> -->
+         </e2:NegativeConsent>
+         <e2:IncludePrescriptionMedications>true</e2:IncludePrescriptionMedications>
+         <e2:IncludeEffectuations>true</e2:IncludeEffectuations>
+         <e2:IncludeNonRelevantPrescriptionMedications>true</e2:IncludeNonRelevantPrescriptionMedications>
+         <!--Optional:-->
+         <!-- <e2:IncludeWithdrawnDrugMedications>
+            <e1:WithdrawnAfterDateTime>?</e1:WithdrawnAfterDateTime>
+         </e2:IncludeWithdrawnDrugMedications> -->
+         <!--Zero or more repetitions:-->
+         <e2:IncludeDrugMedicationType>true</e2:IncludeDrugMedicationType>
+      </e2:GetMedicineCardRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
